@@ -84,3 +84,20 @@ Then, to run the tests:
 ```bash
 yarn hardhat test
 ```
+
+## Changelog: Solidity 0.7 to 0.8
+
+### Silent Changes of the Semantics
+
+In Solidity 0.8, some existing code changes its behavior without the compiler specifically notifying about it. These changes include:
+
+#### Arithmetic Operations
+
+Arithmetic operations now revert on underflow and overflow. This change is intended to increase the readability of code by making overflow checks the default behavior, even though it may slightly increase gas costs.
+
+If you want to utilize the previous wrapping behavior where the code execution wouldn't halt on overflow or underflow, you can use `unchecked { ... }`. Here's an example:
+
+```solidity
+unchecked {
+    // Arithmetic operations that may underflow/overflow
+}
